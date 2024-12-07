@@ -4,4 +4,4 @@ reports = File.read('./input.txt').each_line.map do |line|
   Report.new(line.split.map(&:to_i))
 end
 
-p reports.count(&:safe?)
+p "safe reports #{reports.count(&:safe?)}"

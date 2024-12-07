@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require './day_1'
+require './elf_calculator'
 
 class ElfCalculatorTest < Minitest::Test
   def test_distance
