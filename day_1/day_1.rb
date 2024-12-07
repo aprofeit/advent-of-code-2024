@@ -19,7 +19,7 @@ class InputReader
   end
 end
 
-class DistanceCalculator
+class ElfCalculator
   attr_reader :first_list, :second_list
 
   def initialize(first_list, second_list)
@@ -34,11 +34,15 @@ class DistanceCalculator
   end
 
   def similarity
+    first_list.each_index.map do |i|
+      matches = second_list.count { |item| item == first_list[i] }
+      first_list[i] * matches
+    end.inject(:+)
   end
 end
 
 first_list, second_list = InputReader.new('input.txt').read
-distance = DistanceCalculator.new(first_list, second_list).distance
+calculator = ElfCalculator.new(first_list, second_list)
 
-puts "distance   #{distance}"
-puts "similarity "
+puts "distance   #{calculator.distance}"
+puts "similarity #{calculator.similarity}"
