@@ -6,30 +6,13 @@ class Report
   end
 
   def safe?
-    (all_ascending? || all_descending?) && deltas_safe?
-  end
-
-  private
-
-  def all_ascending?
-    levels == levels.sort
-  end
-
-  def all_descending?
-    levels.reverse == levels.reverse.sort
-  end
-
-  def deltas_safe?
-    level_count = levels.size
-
-    levels.each_with_index do |level, i|
-      next if i == level_count - 1
-      next_level = levels[i + 1]
-
-      delta = (next_level - level).abs
-      return false if delta < 1 || delta > 3
+    ascending = levels.each_cons(2).all? { |a, b| a < b }
+    descending = levels.each_cons(2).all? { |a, b| a > b }
+    safe_deltas = levels.each_cons(2).all? do |a, b|
+      delta = (b - a).abs
+      delta >= 1 && delta <= 3
     end
 
-    true
+    (ascending || descending) && safe_deltas
   end
 end

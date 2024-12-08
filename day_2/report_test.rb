@@ -13,4 +13,10 @@ class ReportTest < Minitest::Test
 
     assert_equal false, report.safe?
   end
+
+  def test_neither_increase_nor_decrease
+    report = Report.new([8, 6, 4, 4, 1])
+
+    assert_equal false, report.safe?
+  end
 end
