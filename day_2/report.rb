@@ -6,12 +6,7 @@ class Report
   end
 
   def safe?
-    safe_deltas = levels.each_cons(2).all? do |a, b|
-      delta = (b - a).abs
-      delta >= 1 && delta <= 3
-    end
-
-    (ascending? || descending?) && safe_deltas
+    (ascending? || descending?) && safe_deltas?
   end
 
   def dampened_safe?
@@ -23,6 +18,13 @@ class Report
     end
 
     false
+  end
+
+  def safe_deltas?
+    levels.each_cons(2).all? do |a, b|
+      delta = (b - a).abs
+      delta >= 1 && delta <= 3
+    end
   end
 
   def ascending?
