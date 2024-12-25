@@ -8,3 +8,4 @@ File.readlines("input.txt").each.with_index do |line, y|
 end
 
 puts word_search.count_occurences("XMAS")
+puts word_search.count_occurences_with_crosses
